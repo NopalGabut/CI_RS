@@ -19,9 +19,21 @@ class Dashboard extends CI_Controller {
         $this->load->view('footer', $data);
     }
 
-    public function load_data()
+    public function load_umum()
     {
-        $data['dashboard'] = $this->m_dashboard->get_data();
+        $data['umum'] = $this->m_dashboard->get_data_umum();
+        echo json_encode($data);
+    }
+
+    public function load_gigi()
+    {
+        $data['gigi'] = $this->m_dashboard->get_data_gigi();
+        echo json_encode($data);
+    }
+
+    public function load_gizi()
+    {
+        $data['gizi'] = $this->m_dashboard->get_data_gizi();
         echo json_encode($data);
     }
 

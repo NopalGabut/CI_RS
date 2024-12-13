@@ -175,14 +175,14 @@
             </div>
             <div class="col-lg-3 col-md-6 col-12">
                 <div class="card">
-                    <span class="mask bg-info opacity-10 border-radius-lg" id="total-gigi"></span>
+                    <span class="mask bg-info opacity-10 border-radius-lg"></span>
                     <div class="card-body p-3 position-relative">
                         <div class="row">
                             <div class="col-8 text-start">
                                 <div class="icon icon-shape bg-white shadow text-center border-radius-2xl">
                                     <i class="fas fa-person-booth text-dark text-gradient text-lg opacity-10" aria-hidden="true"></i>
                                 </div>
-                                <h5 class="text-white font-weight-bolder mb-0 mt-3">0</h5>
+                                <h5 class="text-white font-weight-bolder mb-0 mt-3" id="total-gigi">0</h5>
                                 <span class="text-white text-sm">Antrian Poli Gigi</span>
                             </div>
                             <div class="col-4 text-end">
@@ -213,9 +213,9 @@
                             <table class="table table-striped" id="table1">
                                 <thead>
                                     <tr>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">No</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">No.Antrian</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Nama</th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Alamat</th>
+                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -242,12 +242,12 @@
                     </div>
                     <div class="card-body px-0 pb-2">
                         <div class="table-responsive">
-                            <table class="table table-striped" id="table1">
+                            <table class="table table-striped" id="table2">
                                 <thead>
                                     <tr>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">No</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">No.Antrian</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Nama</th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Alamat</th>
+                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -274,12 +274,12 @@
                     </div>
                     <div class="card-body px-0 pb-2">
                         <div class="table-responsive">
-                            <table class="table table-striped" id="table1">
+                            <table class="table table-striped" id="table3">
                                 <thead>
                                     <tr>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">No</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">No.Antrian</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Nama</th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Alamat</th>
+                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
                                     </tr>
                                 </thead>
                                 <tbody>
