@@ -149,8 +149,14 @@
                                 </div>
                                 <div class="col-md-6 col-12">
                                     <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">Tempat Tanggal Lahir</label>
-                                        <input class="form-control reset-form" type="text" placeholder="Contoh: Klaten, 13/06/1998" id="txttl">
+                                        <label for="txttl" class="form-control-label">Tempat Lahir</label>
+                                        <input class="form-control reset-form" type="text" placeholder="Contoh: Klaten" id="txtempatlahir">
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-12">
+                                    <div class="form-group">
+                                        <label for="txttl" class="form-control-label">Tanggal Lahir</label>
+                                        <input class="form-control reset-form" type="date" id="txtanggallahir">
                                     </div>
                                 </div>
                                 <div class="col-md-6 col-12">
@@ -194,14 +200,6 @@
                                         <input class="form-control reset-form" type="number" placeholder="Contoh: 087754534326" id="txphone">
                                     </div>
                                 </div>
-                                <!-- <div class="col-md-6 col-12">
-                                    <div class="form-group">
-                                        <label for="tujuanpoli">Poli Tujuan</label>
-                                        <select class="form-control reset-form" id="txpoli">
-                                            <option value="">Memuat data...</option>
-                                        </select>
-                                    </div>
-                                </div> -->
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
                                         <i class="bx bx-x d-block d-sm-none"></i>

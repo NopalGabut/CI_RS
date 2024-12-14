@@ -1,6 +1,6 @@
 function reset_form() {
 	$(".reset-form").val("");
-	load_poli();  // Memuat ulang dropdown Poliklinik
+	load_poli();  
     load_polidata();
 }
 
@@ -12,11 +12,13 @@ function reset_form() {
   function simpan_data() {
 	let nama = $("#txnama").val();
 	let idpasien = $("#txidpasien").val();
+    let keluhan = $("#txkeluhan").val();
 	let poli = $("#txpoli").val();
 
 	let formData = new FormData(); 
 	formData.append("txnama", nama);
 	formData.append("txidpasien", idpasien);
+	formData.append("txkeluhan", keluhan);
 	formData.append("txpoli", poli);
 	
 	$.ajax({

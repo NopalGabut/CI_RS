@@ -23,7 +23,7 @@ class Poligizi extends CI_Controller
 
     public function load_data()
     {
-        $data['poliumum'] = $this->m_poligizi->get_data();
+        $data['poligizi'] = $this->m_poligizi->get_data();
         echo json_encode($data);
     }
 
@@ -34,10 +34,8 @@ class Poligizi extends CI_Controller
 
         
         if ($status == 1) {
-            $action = "Sedang Dilayani"; 
-        } elseif ($status == 0) {
-            $action = "Menunggu Konfirmasi"; 
-        } elseif ($status == 2) {
+            $action = "Memanggil Pasien"; 
+        }elseif ($status == 2) {
             $action = "Pelayanan Selesai";
         } else {
             $action = "unknown";

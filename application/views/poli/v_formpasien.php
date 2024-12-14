@@ -110,7 +110,7 @@
         <div class="col-lg-10">
             <div class="card shadow-lg">
                 <div class="card-header bg-gradient-danger text-white text-center">
-                    <h4 class="mb-0">Formulir Pendaftaran Poli</h4>
+                    <h4 class="mb-0">Formulir Pendaftaran Pasien</h4>
                 </div>
                 <div class="card-body">
                     <form>
@@ -135,8 +135,14 @@
                             </div>
                             <div class="col-md-6 col-12">
                                 <div class="form-group">
-                                    <label for="txttl" class="form-control-label">Tempat Tanggal Lahir</label>
-                                    <input class="form-control reset-form" type="text" placeholder="Contoh: Klaten, 13/06/1998" id="txttl">
+                                    <label for="txttl" class="form-control-label">Tempat Lahir</label>
+                                    <input class="form-control reset-form" type="text" placeholder="Contoh: Klaten" id="txtempatlahir">
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <div class="form-group">
+                                    <label for="txttl" class="form-control-label">Tanggal Lahir</label>
+                                    <input class="form-control reset-form" type="date"  id="txtanggallahir">
                                 </div>
                             </div>
                             <div class="col-md-6 col-12">

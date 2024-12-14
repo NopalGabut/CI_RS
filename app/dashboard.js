@@ -1,197 +1,58 @@
-function load_data() {
-	$.post(
-		"dashboard/load_umum",
-		{},
-		function (data) {
-			console.log("Data received:", data);
-			$("#table1").DataTable().clear().destroy();
-			$("#table1 > tbody").html("");
-			let index = 1;
-			const reversedData = data.umum.reverse();
-			$.each(reversedData, function (idx, val) {
-				html = "<tr>";
-				html += "<td>" + val["antrianpoliNo"] + "</td>";
-				html += "<td>" + val["poliklinikNama"] + "</td>";
-				html +=
-					"<td><span " +
-					(val["antrianpoliStatus"] != "2"
-						? 'onclick="status_data(' +
-						  val["antrianpoliId"] +
-						  ", " +
-						  val["antrianpoliStatus"] +
-						  ')"'
-						: "") +
-					' class="badge ' +
-					(val["antrianpoliStatus"] == "1"
-						? "bg-success"
-						: val["antrianpoliStatus"] == "2"
-						? "bg-primary"
-						: "bg-secondary") +
-					'">' +
-					(val["antrianpoliStatus"] == "1"
-						? "<i class='bi bi-clock'></i> Dilayani"
-						: val["antrianpoliStatus"] == "2"
-						? "<i class='bi bi-check-circle'></i> Selesai"
-						: "<i class='bi bi-hourglass-split'></i> Menunggu") +
-					"</span></td>";
-                html += "</tr>";
-				$("#table1 > tbody").append(html);
-				index++;
-			});
-		},
-		"json"
-	);
-}
-
-function load_gigi() {
-	$.post(
-		"dashboard/load_gigi",
-		{},
-		function (data) {
-			console.log("Data received:", data);
-			$("#table2").DataTable().clear().destroy();
-			$("#table2 > tbody").html("");
-			let index = 1;
-			const reversedData = data.gigi.reverse();
-			$.each(reversedData, function (idx, val) {
-				html = "<tr>";
-				html += "<td>" + val["antrianpoliNo"] + "</td>";
-				html += "<td>" + val["poliklinikNama"] + "</td>";
-				html +=
-					"<td><span " +
-					(val["antrianpoliStatus"] != "2"
-						? 'onclick="status_data(' +
-						  val["antrianpoliId"] +
-						  ", " +
-						  val["antrianpoliStatus"] +
-						  ')"'
-						: "") +
-					' class="badge ' +
-					(val["antrianpoliStatus"] == "1"
-						? "bg-success"
-						: val["antrianpoliStatus"] == "2"
-						? "bg-primary"
-						: "bg-secondary") +
-					'">' +
-					(val["antrianpoliStatus"] == "1"
-						? "<i class='bi bi-clock'></i> Dilayani"
-						: val["antrianpoliStatus"] == "2"
-						? "<i class='bi bi-check-circle'></i> Selesai"
-						: "<i class='bi bi-hourglass-split'></i> Menunggu") +
-					"</span></td>";
-                html += "</tr>";
-				$("#table2 > tbody").append(html);
-				index++;
-			});
-		},
-		"json"
-	);
-}
-
-function load_gizi() {
-	$.post(
-		"dashboard/load_gizi",
-		{},
-		function (data) {
-			console.log("Data received:", data);
-			$("#table3").DataTable().clear().destroy();
-			$("#table3 > tbody").html("");
-			let index = 1;
-			const reversedData = data.gizi.reverse();
-			$.each(reversedData, function (idx, val) {
-				html = "<tr>";
-				html += "<td>" + val["antrianpoliNo"] + "</td>";
-				html += "<td>" + val["poliklinikNama"] + "</td>";
-				html +=
-					"<td><span " +
-					(val["antrianpoliStatus"] != "2"
-						? 'onclick="status_data(' +
-						  val["antrianpoliId"] +
-						  ", " +
-						  val["antrianpoliStatus"] +
-						  ')"'
-						: "") +
-					' class="badge ' +
-					(val["antrianpoliStatus"] == "1"
-						? "bg-success"
-						: val["antrianpoliStatus"] == "2"
-						? "bg-primary"
-						: "bg-secondary") +
-					'">' +
-					(val["antrianpoliStatus"] == "1"
-						? "<i class='bi bi-clock'></i> Dilayani"
-						: val["antrianpoliStatus"] == "2"
-						? "<i class='bi bi-check-circle'></i> Selesai"
-						: "<i class='bi bi-hourglass-split'></i> Menunggu") +
-					"</span></td>";
-                html += "</tr>";
-				$("#table3 > tbody").append(html);
-				index++;
-			});
-		},
-		"json"
-	);
-}
-
 function updateTotalPasien() {
 	$.ajax({
-		url: "dashboard/count_data", // Endpoint untuk mendapatkan jumlah data
-		method: "GET",
-		success: function (response) {
-			// Parsing response JSON dari server
-			const data = JSON.parse(response);
-			// Mengubah teks pada elemen dengan id "total-pasien"
-			$("#total-pasien").text(data.total);
-		},
-		error: function (xhr, status, error) {
-			console.error("Error fetching total pasien:", error);
-		},
-	});
+        url: "dashboard/count_data",
+        method: "GET",
+        success: function (response) {
+            const data = JSON.parse(response);
+            $("#total-pasien").text(data.total);
+        },
+        error: function (xhr, status, error) {
+            console.error("Error fetching total pasien:", error);
+            alert("Gagal memuat total pasien. Silakan coba lagi nanti.");
+        },
+    });
 }
 function updateTotalumum() {
 	$.ajax({
-		url: "dashboard/count_umum", // Endpoint untuk mendapatkan jumlah data
-		method: "GET",
-		success: function (response) {
-			// Parsing response JSON dari server
-			const data = JSON.parse(response);
-			// Mengubah teks pada elemen dengan id "total-pasien"
-			$("#total-umum").text(data.total);
-		},
-		error: function (xhr, status, error) {
-			console.error("Error fetching total pasien:", error);
-		},
-	});
+        url: "dashboard/count_umum", 
+        method: "GET",
+        success: function (response) {
+            const data = JSON.parse(response);
+            $("#total-umum").text(data.total);
+        },
+        error: function (xhr, status, error) {
+            console.error("Error fetching total umum:", error);
+            alert("Gagal memuat total pasien umum. Silakan coba lagi nanti.");
+        },
+    });
 }
 function updateTotalgigi() {
 	$.ajax({
-		url: "dashboard/count_gigi", // Endpoint untuk mendapatkan jumlah data
-		method: "GET",
-		success: function (response) {
-			// Parsing response JSON dari server
-			const data = JSON.parse(response);
-			// Mengubah teks pada elemen dengan id "total-pasien"
-			$("#total-gigi").text(data.total);
-		},
-		error: function (xhr, status, error) {
-			console.error("Error fetching total pasien:", error);
-		},
-	});
+        url: "dashboard/count_gigi",
+        method: "GET",
+        success: function (response) {
+            const data = JSON.parse(response);
+            $("#total-gigi").text(data.total);
+        },
+        error: function (xhr, status, error) {
+            console.error("Error fetching total gigi:", error);
+            alert("Gagal memuat total pasien gigi. Silakan coba lagi nanti.");
+        },
+    });
 }
 function updateTotalgizi() {
 	$.ajax({
-		url: "dashboard/count_gizi", // Endpoint untuk mendapatkan jumlah data
-		method: "GET",
-		success: function (response) {
-			// Parsing response JSON dari server
-			const data = JSON.parse(response);
-			// Mengubah teks pada elemen dengan id "total-pasien"
-			$("#total-gizi").text(data.total);
-		},
-		error: function (xhr, status, error) {
-			console.error("Error fetching total pasien:", error);
-		},
-	});
+        url: "dashboard/count_gizi", 
+        method: "GET",
+        success: function (response) {
+            const data = JSON.parse(response);
+            $("#total-gizi").text(data.total);
+        },
+        error: function (xhr, status, error) {
+            console.error("Error fetching total gizi:", error);
+            alert("Gagal memuat total pasien gizi. Silakan coba lagi nanti.");
+        },
+    });
 }
 
 $(document).ready(function () {
@@ -224,8 +85,5 @@ $(document).ready(function () {
 	updateTotalgizi();
 	updateTotalgigi();
 	updateTotalumum();
-	load_data();
 	updateTotalPasien();
-    load_gigi();
-    load_gizi();
 });

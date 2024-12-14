@@ -17,7 +17,7 @@ class Poli extends CI_Controller
         $data['js'] = 'poli';
 
         $this->load->view('header', $data);
-        $this->load->view('poli/v_poli', $data);
+        $this->load->view('poli/v_formpasien', $data);
         $this->load->view('footer', $data);
     }
 
@@ -27,17 +27,6 @@ class Poli extends CI_Controller
         echo json_encode($data);
     }
 
-    // public function load_poli()
-    // {
-    //     $data['polidata'] = $this->m_poli->get_join_data();
-    //     echo json_encode($data);
-    // }
-
-    // public function load_poliklinik()
-    // {
-    //     $data['polidata'] = $this->m_poli->get_data_poli();
-    //     echo json_encode($data);
-    // }
 
     public function create_data()
     {
@@ -45,13 +34,14 @@ class Poli extends CI_Controller
         $nama = $this->input->post('txnama');
         $ktp = $this->input->post('txktp');
         $alamat = $this->input->post('txalamat');
-        $ttl = $this->input->post('txttl');
+        $tempat = $this->input->post('txtempatlahir');
+        $tanggal_input = $this->input->post('txtanggallahir');
+        $tanggal = $this->format_tanggal($tanggal_input);
         $usia = $this->input->post('txusia');
         $keluhan = $this->input->post('txkeluhan');
         $kelamin = $this->input->post('txkelamin');
         $golongan = $this->input->post('txgolongan');
         $phone = $this->input->post('txphone');
-        // $tujuanpoli = $this->input->post('txpoli');
         $sql = "SELECT IFNULL(
             (
                 SELECT CONCAT(
@@ -71,19 +61,19 @@ class Poli extends CI_Controller
 
         $no_trans = $this->db->query($sql)->row()->no_trans;
 
-        
+
         $save_data = array(
             'poliklinikNama' => $nama,
             'poliklinikKtp' => $ktp,
             'poliklinikIdPasien' => $no_trans,
             'poliklinikAlamat' => $alamat,
-            'poliklinikTTL	' => $ttl,
+            'poliklinikTempatLahir' => $tempat,
+            'poliklinikTanggalLahir' => $tanggal,
             'poliklinikUsia	' => $usia,
             'poliklinikKeluhan' => $keluhan,
             'poliklinikKelamin' => $kelamin,
             'poliklinikGolongan' => $golongan,
             'poliklinikPhone' => $phone,
-            // 'poliklinikData_Id' => $tujuanpoli,
             'poliklinikDaftar' => date('Y-m-d')
         );
 
@@ -95,6 +85,24 @@ class Poli extends CI_Controller
             echo json_encode(array('status' => 'error', 'msg' => 'Gagal menyimpan data barang.'));
         }
     }
+
+    private function format_tanggal($tanggal)
+{
+    $bulan = array(
+        "Januari", "Februari", "Maret", "April", "Mei", "Juni",
+        "Juli", "Agustus", "September", "Oktober", "November", "Desember"
+    );
+
+    $tanggal = date('Y-m-d', strtotime($tanggal)); 
+    $tanggal_parts = explode('-', $tanggal);
+
+    $hari = $tanggal_parts[2];
+    $bulan_text = $bulan[(int)$tanggal_parts[1] - 1];
+    $tahun = $tanggal_parts[0];
+
+    return "$hari $bulan_text $tahun";
+}
+
 
     public function delete($id)
     {

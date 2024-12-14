@@ -131,6 +131,12 @@
                             </div>
                             <div class="col-md-6 col-12">
                                 <div class="form-group">
+                                    <label for="txkeluhan" class="form-control-label">Keluhan</label>
+                                    <input class="form-control reset-form" type="text" id="txkeluhan">
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <div class="form-group">
                                     <label for="tujuanpoli">Poli Tujuan</label>
                                     <select class="form-control reset-form" id="txpoli">
                                         <option value="">Memuat data...</option>

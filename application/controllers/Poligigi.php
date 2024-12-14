@@ -8,13 +8,13 @@ class Poligigi extends CI_Controller
     {
         parent::__construct();
         $this->load->database();
-        $this->load->model('m_poligizi');
+        $this->load->model('m_poligigi');
     }
 
     public function index()
     {
         $data['title'] = '';
-        $data['js'] = 'poligizi';
+        $data['js'] = 'poligigi';
 
         $this->load->view('header', $data);
         $this->load->view('poli/v_poligigi', $data);
@@ -23,7 +23,7 @@ class Poligigi extends CI_Controller
 
     public function load_data()
     {
-        $data['poliumum'] = $this->m_poligigi->get_data();
+        $data['poligigi'] = $this->m_poligigi->get_data();
         echo json_encode($data);
     }
 
@@ -34,10 +34,8 @@ class Poligigi extends CI_Controller
 
         
         if ($status == 1) {
-            $action = "Sedang Dilayani"; 
-        } elseif ($status == 0) {
-            $action = "Menunggu Konfirmasi"; 
-        } elseif ($status == 2) {
+            $action = "Memanggil Pasien"; 
+        }elseif ($status == 2) {
             $action = "Pelayanan Selesai";
         } else {
             $action = "unknown";

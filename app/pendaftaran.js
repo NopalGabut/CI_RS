@@ -12,8 +12,7 @@ function load_data(){
             html += '<td>' + val['poliklinikKtp'] + '</td>';
 			html += '<td>' + val['poliklinikAlamat'] + '</td>';
 			html += '<td>' + val['poliklinikIdPasien'] + '</td>';
-            // html += '<td>' + val['poliklinikDataNama'] + '</td>';
-            html += '<td>' + val['poliklinikTTL'] + '</td>';
+            html += '<td>' + val['poliklinikTempatLahir'] + ', ' + val['poliklinikTanggalLahir'] +'</td>';
             html += '<td>' + val['poliklinikUsia']+'</td>';
             html += '<td>' + val['poliklinikKeluhan']+'</td>';
             html += '<td>' + val['poliklinikKelamin'] + '</td>';
@@ -50,7 +49,8 @@ function edit_data(id) {
 			$("#txidpasien").val(data.data.poliklinikIdPasien);
 			// load_poli(data.data.poliklinikData_Id);
 			$("#txalamat").val(data.data.poliklinikAlamat);
-			$("#txttl").val(data.data.poliklinikTTL);
+			$("#txtempatlahir").val(data.data.poliklinikTempatLahir);
+			$("#txtanggallahir").val(data.data.poliklinikTanggalLahir);
 			$("#txkeluhan").val(data.data.poliklinikKeluhan);
 			$("#txusia").val(data.data.poliklinikUsia);
 			$("#txkelamin").val(data.data.poliklinikKelamin).change();
@@ -72,8 +72,9 @@ function update_data() {
 	let poliklinikIdPasien = $("#txidpasien").val();
 	// let poliklinikData_Id = $("#txpoli").val();
 	let poliklinikAlamat = $("#txalamat").val();
-	let poliklinikTTL = $("#txttl").val();
 	let poliklinikKeluhan = $("#txkeluhan").val();
+	let poliklinikTempatLahir = $("#txtempatlahir").val();
+	let poliklinikTanggalLahir = $("#txtanggallahir").val();
 	let poliklinikUsia = $("#txusia").val(); 
 	let poliklinikKelamin = $("#txkelamin").val();
 	let poliklinikGolongan = $("#txgolongan").val();
@@ -88,7 +89,8 @@ function update_data() {
 	formData.append("poliklinikIdPasien", poliklinikIdPasien);
 	// formData.append("poliklinikData_Id", poliklinikData_Id);
 	formData.append("poliklinikAlamat", poliklinikAlamat);
-	formData.append("poliklinikTTL", poliklinikTTL);
+	formData.append("poliklinikTempatLahir", poliklinikTempatLahir);
+	formData.append("poliklinikTanggalLahir", poliklinikTanggalLahir);
 	formData.append("poliklinikKeluhan", poliklinikKeluhan);
 	formData.append("poliklinikUsia", poliklinikUsia);
 	formData.append("poliklinikKelamin", poliklinikKelamin);
@@ -125,34 +127,6 @@ function update_data() {
     });
 }
 
-// let txpoliChoices;
-// function load_poli(selectedValue = "") { // Tambahkan parameter untuk menyimpan nilai yang dipilih sebelumnya
-//     $.post("poli/load_poliklinik", function (res) {
-//         if (res && res.polidata && Array.isArray(res.polidata)) {
-//             const $txpoli = $("#txpoli");
-//             $txpoli.empty(); // Kosongkan dropdown
-
-//             // Tambahkan opsi default
-//             $txpoli.append('<option value="">Pilih Poliklinik</option>');
-
-//             // Tambahkan opsi dari data pasien
-//             $.each(res.polidata, function (i, v) {
-//                 const selected = v.poliklinikDataId == selectedValue ? "selected" : "";
-//                 $txpoli.append(
-//                     `<option value="${v.poliklinikDataId}" ${selected}>${v.poliklinikDataNama}</option>`
-//                 );
-//             });
-
-//             // Re-initialize Choices.js jika digunakan
-//             if (txpoliChoices) {
-//                 txpoliChoices.destroy();
-//             }
-//             txpoliChoices = new Choices($txpoli[0]);
-//         } else {
-//             console.error("Respon server tidak valid:", res);
-//         }
-//     }, "json");
-// }
 
   function openModal() {
 	reset_form();
@@ -161,7 +135,8 @@ function update_data() {
 
 function reset_form() {
 	$(".reset-form").val("");
-	$("#txkelamin").val("-Pilih Jenis Kelamin-");
+	$("#txkelamin").prop("selectedIndex", 0); 
+    $("#txgolongan").prop("selectedIndex", 0);
 }
 
 function Delete(id) {

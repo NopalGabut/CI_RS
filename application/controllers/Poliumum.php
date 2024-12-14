@@ -32,18 +32,15 @@ class Poliumum extends CI_Controller
         $id = $this->input->post("id");
         $status = $this->input->post("status");
 
-        
         if ($status == 1) {
-            $action = "Sedang Dilayani"; 
-        } elseif ($status == 0) {
-            $action = "Sedang Menunggu Konfirmasi"; 
+            $action = "Memanggil Pasien";
         } elseif ($status == 2) {
             $action = "Pelayanan Selesai";
         } else {
             $action = "unknown";
         }
 
-        $isSuccess = $this->m_poliumum->active_data($id, $status); 
+        $isSuccess = $this->m_poliumum->active_data($id, $status);
 
         if ($isSuccess) {
             $res["status"] = "success";
@@ -56,4 +53,3 @@ class Poliumum extends CI_Controller
         echo json_encode($res);
     }
 }
-?>

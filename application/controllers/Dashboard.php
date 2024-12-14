@@ -19,37 +19,26 @@ class Dashboard extends CI_Controller {
         $this->load->view('footer', $data);
     }
 
-    public function load_umum()
-    {
-        $data['umum'] = $this->m_dashboard->get_data_umum();
-        echo json_encode($data);
-    }
-
-    public function load_gigi()
-    {
-        $data['gigi'] = $this->m_dashboard->get_data_gigi();
-        echo json_encode($data);
-    }
-
-    public function load_gizi()
-    {
-        $data['gizi'] = $this->m_dashboard->get_data_gizi();
-        echo json_encode($data);
-    }
-
+    
     public function count_data() {
         $total = $this->m_dashboard->get_total_pasien(); 
         echo json_encode(['total' => $total]); 
     }
     public function count_umum() {
+        $tanggal = date('Y-m-d');
+        $this->m_dashboard->reset_count($tanggal);
         $total = $this->m_dashboard->get_total_umum(); 
         echo json_encode(['total' => $total]); 
     }
     public function count_gigi() {
+        $tanggal = date('Y-m-d');
+        $this->m_dashboard->reset_count($tanggal);
         $total = $this->m_dashboard->get_total_gigi(); 
         echo json_encode(['total' => $total]); 
     }
     public function count_gizi() {
+        $tanggal = date('Y-m-d');
+        $this->m_dashboard->reset_count($tanggal);
         $total = $this->m_dashboard->get_total_gizi(); 
         echo json_encode(['total' => $total]); 
     }

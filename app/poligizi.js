@@ -7,17 +7,18 @@ function load_data() {
             $("#table1").DataTable().clear().destroy();
             $("#table1 > tbody").html("");
             let index = 1;
-            const reversedData = data.poliumum.reverse();
+            const reversedData = data.poligizi.reverse();
             $.each(reversedData, function (idx, val) {
                 html = "<tr>";
                 html += "<td>" + val["antrianpoliNo"] + "</td>";
                 html += "<td>" + val["poliklinikIdPasien"] + "</td>";
                 html += "<td>" + val["poliklinikNama"] + "</td>";
+                html += "<td>" + val["antrianpoliKeluhan"] + "</td>";
                 html += "<td>" + val["poliklinikDataNama"] + "</td>";
                 html += '<td><span ' + (val["antrianpoliStatus"] != "2" ? 'onclick="status_data(' + val["antrianpoliId"] + ', ' + val["antrianpoliStatus"] + ')"' : '') + ' class="badge ' +
                     (val["antrianpoliStatus"] == "1" ? "bg-success" :
                         (val["antrianpoliStatus"] == "2" ? "bg-primary" : "bg-secondary")) + '">' +
-                    (val["antrianpoliStatus"] == "1" ? "<i class='bi bi-clock'></i> Dilayani" :
+                    (val["antrianpoliStatus"] == "1" ? "<i class='bi bi-clock'></i>  Calling Pasien" :
                         (val["antrianpoliStatus"] == "2" ? "<i class='bi bi-check-circle'></i> Selesai" : "<i class='bi bi-hourglass-split'></i> Menunggu")) +
                     "</span></td>";
                 html += "</tr>";
@@ -40,11 +41,8 @@ function status_data(id, status) {
         actionText = "Selesaikan antrian?";
         confirmButtonText = "Ya, Selesaikan";
     } else if (status == 0) {
-        actionText = "Pasien sedang dilayani?";
-        confirmButtonText = "Ya, Dilayani";
-    } else if (status == 2) {
-        actionText = "Pasien harus menunggu kembali?";
-        confirmButtonText = "Ya, Kembalikan";
+        actionText = "Panggil Pasien?";
+        confirmButtonText = "Ya, Panggil Pasien";
     }
 
     // Konfirmasi dengan SweetAlert
@@ -59,25 +57,14 @@ function status_data(id, status) {
         if (result.isConfirmed) {
             $.post(
                 "poligizi/status_data",
-                { id: id, status: status }, // Kirimkan status dalam request
+                { id: id, status: status }, 
                 function (data) {
                     if (data.status === "success") {
-                        Swal.fire({
-                            title: "Sukses!",
-                            text: data.msg,
-                            icon: "success",
-                            confirmButtonText: "OK",
-                        }).then(() => {
-                            location.reload();
-                            load_data();
-                        });
+                        toastr.success(data.msg, "Sukses");
+                        location.reload();
+                        load_data();
                     } else {
-                        Swal.fire({
-                            title: "Gagal!",
-                            text: data.msg,
-                            icon: "error",
-                            confirmButtonText: "OK",
-                        });
+                        toastr.error(data.msg, "Gagal");
                     }
                 },
                 "json"

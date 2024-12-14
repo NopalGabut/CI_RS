@@ -60,24 +60,22 @@ class Daftarpoli extends CI_Controller
     
     public function create_data() {
         $idpasien = $this->input->post('txidpasien');
+        $keluhan = $this->input->post('txkeluhan');
         $poli = $this->input->post('txpoli');
         
-        // Get the queue number for the selected poli
         $nomor_antrian = $this->m_daftarpoli->get_nomor_antrian($poli);
     
-        // Prepare data for saving
         $save_data = array(
             'antrianpoliNo' => $nomor_antrian,
             'antrianpoliIdPasien' => $idpasien,
+            'antrianpoliKeluhan' => $keluhan,
             'antrianpoliDataId' => $poli,
             'antrianpoliStatus' => 0,
             'antrianpoliDaftar' => date('Y-m-d')
         );
     
-        // Insert data into the database
         $insert_id = $this->m_daftarpoli->insert_data($save_data);
     
-        // Return response based on the result
         if ($insert_id) {
             echo json_encode(array('status' => 'success', 'msg' => 'Antrian berhasil ditambahkan.'));
         } else {
@@ -86,13 +84,4 @@ class Daftarpoli extends CI_Controller
     }
     
     
-        public function delete($id)
-    {
-        $this->load->model('m_daftarpoli');
-        if ($this->m_pendaftaran->delete_data($id)) {
-            echo json_encode(array('status' => 'success', 'msg' => 'Data berhasil dihapus.'));
-        } else {
-            echo json_encode(array('status' => 'error', 'msg' => 'Data tidak ditemukan atau gagal dihapus.'));
-        }
-    }
 }

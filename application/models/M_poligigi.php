@@ -7,7 +7,7 @@ class M_poligigi extends CI_Model {
     }
 
     public function get_data(){
-        $today = date('Y-m-d'); 
+        $today = date('Y-m-d');
         $sql = "SELECT * FROM antrianpoli 
         JOIN poliklinik ON poliklinikId = antrianpoliIdPasien
         JOIN poliklinikdata ON poliklinikdataId = antrianpoliDataId
@@ -25,14 +25,15 @@ class M_poligigi extends CI_Model {
     
     public function active_data($id)
     {
-        $sql = "UPDATE antrianpoli 
-            SET antrianpoliStatus = CASE 
-                WHEN antrianpoliStatus = 0 THEN 1   
-                WHEN antrianpoliStatus = 1 THEN 2  
-                ELSE antrianpoliStatus            
-            END 
-            WHERE datapoli_Id = '$id'";
 
-        return $this->db->query($sql);
+        $sql = "UPDATE antrianpoli 
+  SET antrianpoliStatus = CASE 
+   WHEN antrianpoliStatus = 0 THEN 1  
+   WHEN antrianpoliStatus = 1 THEN 2  
+   ELSE antrianpoliStatus  
+  END 
+  WHERE antrianpoliId = ?";
+
+        return $this->db->query($sql, array($id));
     }
 }

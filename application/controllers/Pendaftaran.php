@@ -51,43 +51,64 @@ class Pendaftaran extends CI_Controller
     }
 
     public function update_table()
-    {
-        $id = $this->input->post('id');
-        $poliklinikNama = $this->input->post('poliklinikNama');
-        $poliklinikKtp = $this->input->post('poliklinikKtp');
-        $poliklinikAlamat = $this->input->post('poliklinikAlamat');
-        $poliklinikTTL = $this->input->post('poliklinikTTL');
-        $poliklinikUsia = $this->input->post('poliklinikUsia');
-        $poliklinikKeluhan = $this->input->post('poliklinikKeluhan');
-        $poliklinikKelamin = $this->input->post('poliklinikKelamin');
-        $poliklinikGolongan = $this->input->post('poliklinikGolongan');
-        $poliklinikPhone = $this->input->post('poliklinikPhone');
-        // $poliklinikDataId = $this->input->post('poliklinikData_Id');
+{
+    $id = $this->input->post('id');
+    $poliklinikNama = $this->input->post('poliklinikNama');
+    $poliklinikKtp = $this->input->post('poliklinikKtp');
+    $poliklinikAlamat = $this->input->post('poliklinikAlamat');
+    $poliklinikTempatLahir = $this->input->post('poliklinikTempatLahir');
+    $poliklinikTanggalLahir = $this->input->post('poliklinikTanggalLahir');
+    $poliklinikUsia = $this->input->post('poliklinikUsia');
+    $poliklinikKeluhan = $this->input->post('poliklinikKeluhan');
+    $poliklinikKelamin = $this->input->post('poliklinikKelamin');
+    $poliklinikGolongan = $this->input->post('poliklinikGolongan');
+    $poliklinikPhone = $this->input->post('poliklinikPhone');
 
-        $update_data = array(
-            'poliklinikNama' => $poliklinikNama,
-            'poliklinikKtp' => $poliklinikKtp,
-            'poliklinikAlamat' => $poliklinikAlamat,
-            'poliklinikTTL	' => $poliklinikTTL,
-            'poliklinikUsia	' => $poliklinikUsia,
-            'poliklinikKeluhan' => $poliklinikKeluhan,
-            'poliklinikKelamin' => $poliklinikKelamin,
-            'poliklinikGolongan' => $poliklinikGolongan,
-            'poliklinikPhone' => $poliklinikPhone
-            // 'poliklinikData_Id' => $poliklinikDataId
-        );
+    $formattedTanggalLahir = $this->format_tanggal($poliklinikTanggalLahir);
 
-        $this->db->where('poliklinikId', $id);
-        if ($this->db->update('poliklinik', $update_data)) {
-            $res['status'] = 'success';
-            $res['msg'] = "Data berhasil diperbarui";
-        } else {
-            $res['status'] = 'error';
-            $res['msg'] = "Gagal memperbarui data";
-        }
+    $update_data = array(
+        'poliklinikNama' => $poliklinikNama,
+        'poliklinikKtp' => $poliklinikKtp,
+        'poliklinikAlamat' => $poliklinikAlamat,
+        'poliklinikTempatLahir' => $poliklinikTempatLahir,
+        'poliklinikTanggalLahir' => $formattedTanggalLahir, 
+        'poliklinikUsia' => $poliklinikUsia,
+        'poliklinikKeluhan' => $poliklinikKeluhan,
+        'poliklinikKelamin' => $poliklinikKelamin,
+        'poliklinikGolongan' => $poliklinikGolongan,
+        'poliklinikPhone' => $poliklinikPhone
+    );
 
-        echo json_encode($res);
+    
+    $this->db->where('poliklinikId', $id);
+    if ($this->db->update('poliklinik', $update_data)) {
+        $res['status'] = 'success';
+        $res['msg'] = "Data berhasil diperbarui";
+    } else {
+        $res['status'] = 'error';
+        $res['msg'] = "Gagal memperbarui data";
     }
+
+    echo json_encode($res);
+}
+
+
+    private function format_tanggal($tanggal)
+{
+    $bulan = array(
+        "Januari", "Februari", "Maret", "April", "Mei", "Juni",
+        "Juli", "Agustus", "September", "Oktober", "November", "Desember"
+    );
+
+    $tanggal = date('Y-m-d', strtotime($tanggal)); 
+    $tanggal_parts = explode('-', $tanggal);
+
+    $hari = $tanggal_parts[2];
+    $bulan_text = $bulan[(int)$tanggal_parts[1] - 1];
+    $tahun = $tanggal_parts[0];
+
+    return "$hari $bulan_text $tahun";
+}
      
     public function delete($id)
     {
